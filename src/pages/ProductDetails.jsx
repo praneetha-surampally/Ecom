@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useProducts } from '../contexts/ProductContext.jsx';
+import { useShop } from '../contexts/ShopContext.jsx';
 
 function ProductDetails() {
   const { id } = useParams();
   const { products } = useProducts();
+  const { addToCart, isInWishlist, toggleWishlist } = useShop();
+  const [added, setAdded] = useState(false);
   const product = products.find((item) => item.id === Number(id));
 
   if (!product) {
@@ -17,6 +21,14 @@ function ProductDetails() {
       </section>
     );
   }
+
+  const saved = isInWishlist(product.id);
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1200);
+  };
 
   return (
     <section className="details-page">
@@ -32,9 +44,14 @@ function ProductDetails() {
           <h1>{product.name}</h1>
           <strong>${product.price.toLocaleString()}</strong>
           <p>{product.description}</p>
-          <button className="cart-button" type="button">
-            Add to Cart
-          </button>
+          <div className="details-actions">
+            <button className="cart-button" type="button" onClick={handleAddToCart}>
+              {added ? 'Added' : 'Add to Cart'}
+            </button>
+            <button className="secondary-action" type="button" onClick={() => toggleWishlist(product)}>
+              {saved ? 'Remove from Wishlist' : 'Add to Wishlist'}
+            </button>
+          </div>
         </article>
       </div>
     </section>

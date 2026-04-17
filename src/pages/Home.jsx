@@ -31,6 +31,11 @@ function Home() {
           <span>
             Discover a focused storefront for premium electronics, fashion, accessories, and home goods.
           </span>
+          <div className="hero-highlights" aria-label="Store highlights">
+            <span>Free shipping over $120</span>
+            <span>12 curated drops</span>
+            <span>Dark mode ready</span>
+          </div>
           <div className="hero-actions">
             <Link className="details-button" to="/collections">
               Shop Collections
@@ -41,15 +46,45 @@ function Home() {
           </div>
         </div>
 
-        <div className="home-showcase" aria-label="Featured product preview">
-          <img src={products[1].image} alt={products[1].name} />
-          <div>
-            <span>{products[1].category}</span>
-            <strong>{products[1].name}</strong>
-            <p>${products[1].price.toLocaleString()}</p>
+        <div className="home-visual-stage" aria-label="Featured product preview">
+          <div className="stage-backdrop" aria-hidden="true"></div>
+          <div className="stage-badge" aria-hidden="true">
+            <span>Limited</span>
+            <strong>Drop</strong>
+          </div>
+          <div className="stage-card stage-card-main">
+            <img src={products[1].image} alt={products[1].name} />
+            <div>
+              <span>{products[1].category}</span>
+              <strong>{products[1].name}</strong>
+              <p>${products[1].price.toLocaleString()}</p>
+            </div>
+          </div>
+          <div className="stage-card stage-card-left">
+            <img src={products[2].image} alt={products[2].name} />
+            <strong>{products[2].name}</strong>
+          </div>
+          <div className="stage-card stage-card-right">
+            <img src={products[0].image} alt={products[0].name} />
+            <strong>{products[0].name}</strong>
           </div>
         </div>
       </div>
+
+      <section className="home-stats" aria-label="ECOM store stats">
+        <div>
+          <strong>4.9/5</strong>
+          <span>Average product rating</span>
+        </div>
+        <div>
+          <strong>24h</strong>
+          <span>Fast dispatch window</span>
+        </div>
+        <div>
+          <strong>120+</strong>
+          <span>Curated style checks</span>
+        </div>
+      </section>
 
       <section className="category-preview" aria-label="Featured categories">
         {featuredCategories.map((category) => (
